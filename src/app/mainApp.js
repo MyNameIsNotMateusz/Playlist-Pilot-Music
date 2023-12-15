@@ -7,7 +7,7 @@ const CLIENT_ID = "337be670400741cc9308edd31aae2db6";
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/";
 const SPACE_DELIMITER = "%20";
-const SCOPES = ["user-read-email", "user-read-private"]
+const SCOPES = ["user-read-email", "user-read-private", "playlist-modify-public", "playlist-modify-private"]
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
 
 const MainApp = () => {
@@ -37,7 +37,10 @@ const MainApp = () => {
         let link = window.location.href;
 
         if (link.length > 30) {
-            const token = window.location.href.slice(36, 247);
+            const link = window.location.href;
+            const searchItem = "&";
+            const index = link.indexOf(searchItem);
+            const token = link.slice(36, index);
             setAccessToken(token);
         }
 
@@ -78,10 +81,7 @@ const MainApp = () => {
         });
     }
 
-
-
-    //tutaj robie sobie jakies kurwa testy
-
+    //This function remove the element from playlist
     const removeItem = (event) => {
         const arrayPlaylist = document.querySelector(".playlistContainer").children;
         const itemToRemove = event.target.id;
@@ -102,6 +102,68 @@ const MainApp = () => {
         })
 
     };
+
+    const createPlaylist = async () => {
+
+        //checking whether we have added a playlist name
+        const playlistName = document.querySelector(".inputName");
+        const alert = document.querySelector(".alertContainer");
+
+        if (!playlistName.value) {
+            alert.style.display = "block"
+        } else {
+            alert.style.display = "none"
+
+            //This code it will be for get the user's id.
+            try {
+                const response = await fetch('https://api.spotify.com/v1/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken,
+                    },
+                });
+
+                if (response.ok) {
+                    const jsonResponse = await response.json();
+                    var userID = jsonResponse["id"];
+                    console.log(userID);
+                } else {
+                    console.error("Błąd podczas pobierania informacji o użytkowniku:", response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error("Wystąpił błąd:", error);
+            }
+
+            //create the playlist
+            const name = playlistName.value;
+
+            try {
+                const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                    method: "POST",
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        'name': name,
+                        'public': true
+                    }),
+                });
+
+
+                if (response.ok) {
+                    const jsonResponse = response.json();
+                }
+            } catch (error) {
+                console.error("Wystąpił błąd:", error);
+            }
+
+            playlistName.value = "";
+        };
+
+        
+
+    }
 
     return (
         <>
@@ -211,7 +273,7 @@ const MainApp = () => {
                                     placeholder='Enter A Name For The playlist'
                                 />
                             </InputGroup>
-                            <Button variant="primary" size="lg">
+                            <Button onClick={createPlaylist} variant="primary" size="lg">
                                 Create A Playlist
                             </Button>
                         </div>
