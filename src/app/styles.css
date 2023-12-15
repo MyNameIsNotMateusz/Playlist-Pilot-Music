@@ -1,0 +1,43 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.nav {
+    margin-bottom: 5rem;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    width: 100%;
+}
+
+.search {
+    margin-bottom: 5rem;
+}
+
+.songContainer {
+    gap: 15px;
+}
+
+.createButton {
+    margin: 5rem auto 1rem auto;
+}
+
+.alertContainer {
+    margin-top: 5rem;
+    display: none;
+}
+
+.countryContainer {
+    display: flex;
+    gap: 2%;
+    margin-top: 10rem;
+}
