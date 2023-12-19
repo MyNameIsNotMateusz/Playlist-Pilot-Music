@@ -7,7 +7,7 @@ const CLIENT_ID = "337be670400741cc9308edd31aae2db6";
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/";
 const SPACE_DELIMITER = "%20";
-const SCOPES = ["user-read-email", "user-read-private", "playlist-modify-public", "playlist-modify-private"]
+const SCOPES = ["user-read-email", "user-read-private", "playlist-modify-public", "playlist-modify-private", "playlist-read-collaborative", "playlist-read-private"]
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
 
 const MainApp = () => {
@@ -126,7 +126,6 @@ const MainApp = () => {
                 if (response.ok) {
                     const jsonResponse = await response.json();
                     var userID = jsonResponse["id"];
-                    console.log(userID);
                 } else {
                     console.error("Błąd podczas pobierania informacji o użytkowniku:", response.status, response.statusText);
                 }
@@ -161,9 +160,54 @@ const MainApp = () => {
             playlistName.value = "";
         };
 
-        
+        //I get the id of the created playlist
 
+        try {
+            const response = await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                },
+            });
+
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                var playlistID = await jsonResponse["items"][0]["id"]
+                console.log(jsonResponse);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+        //adds songs to the playlist
+        const arraySong = [];
+
+        playlist.map((item) => {
+            arraySong.push(item["uri"]);
+        });
+
+        try {
+            const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
+                method: "POST",
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "uris": arraySong,
+                    "position": 0,
+                }),
+            });
+
+            if (response.ok) {
+                const jsonResponse = await response.json();
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
     }
+
 
     return (
         <>
