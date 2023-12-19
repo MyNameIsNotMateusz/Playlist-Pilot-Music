@@ -324,7 +324,7 @@ const MainApp = () => {
                         </div>
                     </Container>
                     <Container id="newReleases">
-                        <NewReleases />
+                        <NewReleases token={accessToken} />
                     </Container>
                 </div>
             }

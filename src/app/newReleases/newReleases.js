@@ -1,11 +1,11 @@
 import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, ListGroup, Button } from 'react-bootstrap';
+import { Container, ListGroup, Card, Button, Row } from 'react-bootstrap';
 import { useEffect, useState, useRef } from "react";
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 
-const NewReleases = () => {
+const NewReleases = (props) => {
 
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -67,7 +67,7 @@ const NewReleases = () => {
     }, [])
 
     const changePosition = async (event) => {
-        
+
         const code = event.target.id;
 
         try {
@@ -84,7 +84,7 @@ const NewReleases = () => {
                     setPosition([capitalLatLang[1], capitalLatLang[0]])
                 }
             }
-        } catch(error) {
+        } catch (error) {
             console.log(error);
         }
 
@@ -103,33 +103,67 @@ const NewReleases = () => {
                         </div>
                     </Container>
                     <Container className="countryContainer">
-                            <ListGroup as="ol" numbered className="countryGroup">
-                                {
-                                    countries != null && countries.map((item) => (
-                                        <ListGroup.Item
-                                            as="li"
-                                            className="d-flex justify-content-between align-items-start groupItem"
+                        <ListGroup as="ol" numbered className="countryGroup">
+                            {
+                                countries != null && countries.map((item) => (
+                                    <ListGroup.Item
+                                        as="li"
+                                        className="d-flex justify-content-between align-items-start groupItem"
+                                        id={item["code"]}
+                                        onClick={changePosition}
+                                    >
+                                        <div className="ms-2 me-auto"
                                             id={item["code"]}
-                                            onClick={changePosition}
                                         >
-                                            <div className="ms-2 me-auto"
-                                            id={item["code"]}
-                                            >
-                                                <div className="fw-bold"
+                                            <div className="fw-bold"
                                                 id={item["code"]}
-                                                >{item["name"]}</div>
-                                                Traffic Direction: {item["trafficDirection"]}
-                                            </div>
-                                        </ListGroup.Item>
-                                    ))
-                                }
+                                            >{item["name"]}</div>
+                                            Traffic Direction: {item["trafficDirection"]}
+                                        </div>
+                                    </ListGroup.Item>
+                                ))
+                            }
 
-                            </ListGroup>
+                        </ListGroup>
                     </Container>
                 </Container>
             </Container>
             <Container>
-                
+                <Row className="resultContainer">
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src="https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89" />
+                        <Card.Body>
+                            <Card.Title>Card Title</Card.Title>
+                            <Card.Text>
+                                Some quick example text to build on the card title and make up the
+                                bulk of the card's content.
+                            </Card.Text>
+                            <Button variant="primary">Go somewhere</Button>
+                        </Card.Body>
+                    </Card>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src="https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89" />
+                        <Card.Body>
+                            <Card.Title>Card Title</Card.Title>
+                            <Card.Text>
+                                Some quick example text to build on the card title and make up the
+                                bulk of the card's content.
+                            </Card.Text>
+                            <Button variant="primary">Go somewhere</Button>
+                        </Card.Body>
+                    </Card>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src="https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89" />
+                        <Card.Body>
+                            <Card.Title>Card Title</Card.Title>
+                            <Card.Text>
+                                Some quick example text to build on the card title and make up the
+                                bulk of the card's content.
+                            </Card.Text>
+                            <Button variant="primary">Go somewhere</Button>
+                        </Card.Body>
+                    </Card>
+                </Row>
             </Container>
         </>
     );

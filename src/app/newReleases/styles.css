@@ -7,6 +7,7 @@
 .releasesContainer {
     display: flex;
     height: 300px;
+
 }
 
 .mapContainer {
@@ -64,6 +65,11 @@
 	background: linear-gradient(transparent, #105cdc);
 }
 
+.resultContainer {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+}
 
   @media screen and (max-width: 1200px) {
 
