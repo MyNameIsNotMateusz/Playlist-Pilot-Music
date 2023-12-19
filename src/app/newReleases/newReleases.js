@@ -14,6 +14,7 @@ const NewReleases = (props) => {
     maptilersdk.config.apiKey = '0P0eWz8KlgWupzQkmazQ';
 
     const [countries, setCountries] = useState();
+    const [releases, setReleases] = useState();
 
     useEffect(() => {
         if (map.current) {
@@ -88,6 +89,35 @@ const NewReleases = (props) => {
             console.log(error);
         }
 
+        try {
+
+            const response = await fetch(`https://api.spotify.com/v1/browse/new-releases?country=${code}`, {
+                method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + props.token,
+                },
+            });
+
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                const releasesArray = [];
+
+                for (let i = 0; i < 3; i++) {
+                    const releasesObject = {
+                        src: jsonResponse["albums"]["items"][i]["images"][0]["url"],
+                        artist: jsonResponse["albums"]["items"][i]["artists"][0]["name"],
+                        title: jsonResponse["albums"]["items"][i]["name"],
+                        link: jsonResponse["albums"]["items"][i]["external_urls"]["spotify"]
+                    }
+                    releasesArray.push(releasesObject);
+                }
+                setReleases(releasesArray);
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+
     };
 
     return (
@@ -130,39 +160,31 @@ const NewReleases = (props) => {
             </Container>
             <Container>
                 <Row className="resultContainer">
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://i.scdn.co/image/ab67616d0000b273c4fee55d7b51479627c31f89" />
-                        <Card.Body>
-                            <Card.Title>Card Title</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
+                    {
+                        releases !== undefined ?
+                            releases.map((item) => {
+
+                                const link = item["link"];
+
+                                return (
+                                    <Card style={{ width: '18rem' }}>
+                                        <Card.Img variant="top" src={item.src} />
+                                        <Card.Body>
+                                            <Card.Title>{item.artist}</Card.Title>
+                                            <Card.Text>
+                                                {item.title}
+                                            </Card.Text>
+                                            <Button
+                                                variant="primary"
+                                                onClick={() => window.open(link, '_blank')}
+                                            >Check It Out</Button>
+                                        </Card.Body>
+                                    </Card>
+                                )
+                            })
+                            :
+                            null
+                    }
                 </Row>
             </Container>
         </>
