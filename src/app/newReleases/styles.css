@@ -7,17 +7,18 @@
 .releasesContainer {
     display: flex;
     height: 300px;
-
+    width: 80%;
 }
 
 .mapContainer {
+   width: 100%;
    height: 100%;
    display: flex;
    justify-content: end;
 }
 
 .mapwrap {
-  width: 80%;
+  width: 100%;
   height: 100%;
 }
 
@@ -32,12 +33,13 @@
 
 .countryContainer {
   height: 100%;
+  width: 100%;
   display: flex;
 }
 
 .countryGroup {
   overflow: auto;
-  width: 60%;
+  width: 100%;
   height: 100%;
 }
 
@@ -71,69 +73,26 @@
   justify-content: center;
 }
 
+
   @media screen and (max-width: 1200px) {
-
-    .mapwrap {
-      width: 90%;
-    }
-
-    .countryGroup {
-      width: 70%;
-    }
-
+    .releasesContainer {
+      width: 95%;
   }
-
-  
-  @media screen and (max-width: 990px) {
-
-    .mapwrap {
-      width: 100%;
-    }
-
   }
 
   @media screen and (max-width: 767px) {
-
     .releasesContainer {
       flex-direction: column;
-      height: auto;
+      height: 600px;
     }
 
     .mapContainer {
-      height: 230px;
-      justify-content: center;
+      height: 50%;
       margin-bottom: 2rem;
-    }
-   
-   .mapwrap {
-     width: 80%;
     }
 
     .countryContainer {
-      height: 100%;
-      justify-content: center;
+      height: 50%;
     }
 
-    .countryGroup {
-      height: 250px;
-    }
-
-  }
-
-  @media screen and (max-width: 500px) {
-    .mapwrap {
-      width: 100%;
-     }
-  }
-
-  @media screen and (max-width: 430px) {
-    .countryGroup {
-      width: 90%;
-    }
-  }
-
-  @media screen and (max-width: 350px) {
-    .countryGroup {
-      width: 97%;
-    }
   }
