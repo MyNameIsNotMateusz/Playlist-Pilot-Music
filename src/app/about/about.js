@@ -40,7 +40,7 @@ const About = () => {
                     <div className="about-btns">
                         <button type="button" className="contactBtn contactBtn-blue"
                             onClick={() => {
-                                window.open('/Mateusz_Otorowski_CV.pdf')
+                                window.open('https://github.com/MyNameIsNotMateusz/Playlist-Pilot-Music/blob/main/public/Mateusz_Otorowski_CV.pdf', '_blank')
                             }}
                         >resume</button>
                         <button type="button" className="contactBtn contactBtn-white"
