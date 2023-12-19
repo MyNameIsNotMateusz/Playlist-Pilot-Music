@@ -38,11 +38,10 @@ const About = () => {
                     <h1>hi<span>!</span></h1>
                     <h2>Here's who I am & what I do</h2>
                     <div className="about-btns">
-                        <button type="button" className="contactBtn contactBtn-blue"
-                            onClick={() => {
-                                window.open('https://github.com/MyNameIsNotMateusz/Playlist-Pilot-Music/blob/main/public/Mateusz_Otorowski_CV.pdf', '_blank')
-                            }}
-                        >resume</button>
+                        <a href="./Mateusz_Otorowski_CV.pdf" download>
+                            <button type="button" className="contactBtn contactBtn-blue"
+                            >resume</button>
+                        </a>
                         <button type="button" className="contactBtn contactBtn-white"
                             onClick={() => {
                                 window.open('https://mynameisnotmateusz.github.io/Personal-Homepage-new/projects.html', '_blank');
