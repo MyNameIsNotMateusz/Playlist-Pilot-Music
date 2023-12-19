@@ -42,11 +42,9 @@ const MainApp = () => {
             const link = window.location.href;
             const searchItem = "&";
             const index = link.indexOf(searchItem);
-            const token = link.slice(36, index);
+            const token = link.slice(72, index);
             setAccessToken(token);
         }
-
-        console.log(accessToken)
 
     }, []);
 
