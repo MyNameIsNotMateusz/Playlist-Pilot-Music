@@ -11,7 +11,7 @@ const About = () => {
                         <div>
                             <div className="shadow">
                                 <div className="about-img">
-                                    <img src="/about.jpg" alt="about image" />
+                                    <img src="https://github.com/MyNameIsNotMateusz/Playlist-Pilot-Music/blob/main/public/about.jpg?raw=true" alt="about image" />
                                 </div>
                             </div>
 
