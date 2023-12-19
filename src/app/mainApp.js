@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Nav, Navbar, Form, Button, InputGroup, Row, Col, Badge, Card, Spinner, Alert } from 'react-bootstrap';
 import './styles.css';
 import { useEffect, useState } from 'react';
+import NewReleases from './newReleases/newReleases';
 
 const CLIENT_ID = "337be670400741cc9308edd31aae2db6";
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -224,7 +225,7 @@ const MainApp = () => {
                             <Nav className="me-auto">
                                 <Nav.Link href="#createButton">Create A Playlist
                                 </Nav.Link>
-                                <Nav.Link href="#home">Trending</Nav.Link>
+                                <Nav.Link href="#newReleases">New Releases</Nav.Link>
                                 <Nav.Link href="#features">About Me</Nav.Link>
                             </Nav>
                         </Container>
@@ -321,6 +322,9 @@ const MainApp = () => {
                                 Create A Playlist
                             </Button>
                         </div>
+                    </Container>
+                    <Container id="newReleases">
+                        <NewReleases />
                     </Container>
                 </div>
             }

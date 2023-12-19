@@ -28,16 +28,10 @@
 }
 
 .createButton {
-    margin: 5rem auto 1rem auto;
+    margin: 5rem auto 5rem auto;
 }
 
 .alertContainer {
     margin-top: 5rem;
     display: none;
-}
-
-.countryContainer {
-    display: flex;
-    gap: 2%;
-    margin-top: 10rem;
 }

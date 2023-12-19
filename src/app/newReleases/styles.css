@@ -1,0 +1,65 @@
+.main {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.releasesContainer {
+    display: flex;
+    height: 300px;
+}
+
+.mapContainer {
+   height: 100%;
+   display: flex;
+   justify-content: end;
+}
+
+.countryContainer {
+  height: 100%;
+  display: flex;
+}
+
+.countryGroup {
+  overflow: auto;
+  width: 60%;
+  height: 100%;
+}
+
+.groupItem:hover {
+  color: white;
+  cursor: pointer;
+  background-color: #0d6dfdb7;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.countryGroup::-webkit-scrollbar {
+	width: 8px;
+}
+
+.countryGroup::-webkit-scrollbar-thumb {
+	background: linear-gradient(transparent, #0d6efd);
+	border-radius: 6px;
+}
+
+.countryGroup::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(transparent, #105cdc);
+}
+
+.mapwrap {
+    width: 80%;
+    height: 100%;
+  }
+  
+  .map {
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 24px -16px rgba(255, 255, 255, 1);
+    border: rgb(53, 53, 53) 1px solid;
+  }
