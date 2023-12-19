@@ -31,7 +31,7 @@ const NewReleases = () => {
                 zoom: zoom
             });
         }
-    }, []);
+    }, [position]);
 
     useEffect(() => {
 
@@ -103,7 +103,6 @@ const NewReleases = () => {
                         </div>
                     </Container>
                     <Container className="countryContainer">
-                        <Container>
                             <ListGroup as="ol" numbered className="countryGroup">
                                 {
                                     countries != null && countries.map((item) => (
@@ -126,14 +125,11 @@ const NewReleases = () => {
                                 }
 
                             </ListGroup>
-                        </Container>
                     </Container>
                 </Container>
             </Container>
             <Container>
-                <Button onClick={() => {
-                    console.log(countries)
-                }}>TEST</Button>
+                
             </Container>
         </>
     );
