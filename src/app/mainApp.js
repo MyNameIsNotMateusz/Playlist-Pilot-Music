@@ -7,7 +7,7 @@ import About from './about/about';
 
 const CLIENT_ID = "337be670400741cc9308edd31aae2db6";
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/";
+const REDIRECT_URL_AFTER_LOGIN = "https://mynameisnotmateusz.github.io/Playlist-Pilot-Music/";
 const SPACE_DELIMITER = "%20";
 const SCOPES = ["user-read-email", "user-read-private", "playlist-modify-public", "playlist-modify-private", "playlist-read-collaborative", "playlist-read-private"]
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
@@ -17,7 +17,7 @@ const MainApp = () => {
 
     const [login, setLogin] = useState(() => {
         let link = window.location.href;
-        if (link.length > 30) {
+        if (link.length > 70) {
             return true;
         } else {
             return false;
@@ -38,13 +38,15 @@ const MainApp = () => {
 
         let link = window.location.href;
 
-        if (link.length > 30) {
+        if (link.length > 70) {
             const link = window.location.href;
             const searchItem = "&";
             const index = link.indexOf(searchItem);
             const token = link.slice(36, index);
             setAccessToken(token);
         }
+
+        console.log(accessToken)
 
     }, []);
 
