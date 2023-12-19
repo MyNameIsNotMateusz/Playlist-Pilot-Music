@@ -1,11 +1,13 @@
 import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, ListGroup, Card, Button, Row } from 'react-bootstrap';
+import { Container, ListGroup, Card, Button, Row, Alert } from 'react-bootstrap';
 import { useEffect, useState, useRef } from "react";
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 
 const NewReleases = (props) => {
+
+    const [show, setShow] = useState();
 
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -15,6 +17,7 @@ const NewReleases = (props) => {
 
     const [countries, setCountries] = useState();
     const [releases, setReleases] = useState();
+    const [isReleases, setIsReleases] = useState();
 
     useEffect(() => {
         if (map.current) {
@@ -46,7 +49,7 @@ const NewReleases = (props) => {
                     const countriesArray = [];
                     jsonResponse.map((item) => {
                         const countryObject = {
-                            code: item["altSpellings"][0],
+                            code: item["cca2"],
                             name: item["name"]["common"],
                             capitalLatLang: item["capitalInfo"]
                             ["latlng"],
@@ -100,7 +103,10 @@ const NewReleases = (props) => {
 
             if (response.ok) {
                 const jsonResponse = await response.json();
+                console.log(jsonResponse);
                 const releasesArray = [];
+
+                console.log(releasesArray);
 
                 for (let i = 0; i < 3; i++) {
                     const releasesObject = {
@@ -112,6 +118,10 @@ const NewReleases = (props) => {
                     releasesArray.push(releasesObject);
                 }
                 setReleases(releasesArray);
+                setIsReleases(true);
+            } else {
+                setReleases();
+                setIsReleases(false);
             }
 
         } catch (error) {
@@ -161,7 +171,7 @@ const NewReleases = (props) => {
             <Container>
                 <Row className="resultContainer">
                     {
-                        releases !== undefined ?
+                        releases !== undefined ? (
                             releases.map((item) => {
 
                                 const link = item["link"];
@@ -182,8 +192,18 @@ const NewReleases = (props) => {
                                     </Card>
                                 )
                             })
-                            :
-                            null
+                        ) : (
+                            isReleases === false ? (
+                                <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                                    <p>
+                                        Sorry, no results found.
+                                    </p>
+                                </Alert>
+                            ) : (
+                                null
+                            )
+                        )
                     }
                 </Row>
             </Container>

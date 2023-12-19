@@ -3,6 +3,7 @@ import { Container, Nav, Navbar, Form, Button, InputGroup, Row, Col, Badge, Card
 import './styles.css';
 import { useEffect, useState } from 'react';
 import NewReleases from './newReleases/newReleases';
+import About from './about/about';
 
 const CLIENT_ID = "337be670400741cc9308edd31aae2db6";
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -226,7 +227,7 @@ const MainApp = () => {
                                 <Nav.Link href="#createButton">Create A Playlist
                                 </Nav.Link>
                                 <Nav.Link href="#newReleases">New Releases</Nav.Link>
-                                <Nav.Link href="#features">About Me</Nav.Link>
+                                <Nav.Link href="#about">About Me</Nav.Link>
                             </Nav>
                         </Container>
                     </Navbar>
@@ -325,6 +326,9 @@ const MainApp = () => {
                     </Container>
                     <Container id="newReleases">
                         <NewReleases token={accessToken} />
+                    </Container>
+                    <Container id="about">
+                        <About />
                     </Container>
                 </div>
             }
