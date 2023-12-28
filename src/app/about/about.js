@@ -55,7 +55,6 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <a href="/Mateusz_Otorowski_CV.pdf" download>Próba</a>
         </Container>
     );
 }
